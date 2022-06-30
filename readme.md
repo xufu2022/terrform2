@@ -29,3 +29,5 @@ terraform destroy
 rm .terraform* -recurse -force
 rm terraform.tfstate*
 ```
+
+ch3-8
