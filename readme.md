@@ -26,6 +26,6 @@ terraform apply -auto-approve
 terraform destroy
 
 # Delete Terraform files 
-rm -rf .terraform*
-rm -rf terraform.tfstate*
+rm .terraform* -recurse -force
+rm terraform.tfstate*
 ```
