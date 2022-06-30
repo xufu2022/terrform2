@@ -31,3 +31,30 @@ rm terraform.tfstate*
 ```
 
 ch3-8
+
+{
+    "measureId": 1,
+    "lead": "a",
+    "unitsOfMeasureId": null,
+    "actualClosingPositionStartDate": "2022-06-01T00:00:00",
+    "actualClosingPositionStartValue": "sfsdf",
+    "actualClosingPositionEndDate": "2022-06-24T00:00:00",
+    "actualClosingPositionEndValue": "sdf",
+    "actualYtdprevious": "sdf",
+    "actualYtdcurrent": "sdf",
+    "targetDate": "2022-06-23T00:00:00",
+    "targetValue": "sdfsdf",
+    "forecastDate": "2022-06-30T00:00:00",
+    "forecastValue": "sdfsdf",
+    "directionsOfTravelId": 2,
+    "statusId": null,
+    "createdOn": "2022-06-28T13:59:29.133",
+    "createdBy": null,
+    "modifiedOn": null,
+    "modifiedBy": null,
+    "directionsOfTravel": null,
+    "measure": null,
+    "status": null,
+    "unitsOfMeasure": null,
+    "id": 1
+  }
