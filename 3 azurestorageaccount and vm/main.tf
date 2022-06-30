@@ -124,19 +124,19 @@ resource "azurerm_subnet_network_security_group_association" "appnsglink" {
   network_security_group_id = azurerm_network_security_group.appnsg.id
 }
 
-# RSA key of size 4096 bits
-# resource "tls_private_key" "linuxkey" {
-#   algorithm = "RSA"
-#   rsa_bits  = 4096
-# }
+#RSA key of size 4096 bits
+resource "tls_private_key" "linuxkey" {
+  algorithm = "RSA"
+  rsa_bits  = 4096
+}
 
-# resource "local_file" "linuxpemkey" {
-#   filename="linuxkey.pem"
-#   content=tls_private_key.linuxkey.private_key_pem
-#   depends_on = [
-#     tls_private_key.linuxkey
-#   ]
-# }
+resource "local_file" "linuxpemkey" {
+  filename="linuxkey.pem"
+  content=tls_private_key.linuxkey.private_key_pem
+  depends_on = [
+    tls_private_key.linuxkey
+  ]
+}
 
 resource "azurerm_linux_virtual_machine" "linuxvm" {
   name                = "linuxvm"
@@ -144,29 +144,29 @@ resource "azurerm_linux_virtual_machine" "linuxvm" {
   location            = local.location
   size                = "Standard_D2S_V3"
   admin_username      = "adminuser"
-  admin_password      = "P@$$w0rd1234!"
-  disable_password_authentication = false
   network_interface_ids = [
     azurerm_network_interface.appinterface.id
   ]
 
-# admin_ssh_key {
-#   username="adminuser"
-#   public_key = tls_private_key.linuxkey.private_key_openssh
-# }
+admin_ssh_key {
+  username="adminuser"
+  public_key = tls_private_key.linuxkey.public_key_openssh
+}
   os_disk {
     caching              = "ReadWrite"
     storage_account_type = "Standard_LRS"
   }
 
   source_image_reference {
-    publisher = "Canonical"
-    offer     = "0001-com-ubuntu-server-focal"
-    sku       = "20_04_lts"
-    version   = "latest"
+    publisher = "RedHat"
+    offer = "RHEL"
+    sku = "83-gen2"
+    version = "latest"
   }
   depends_on = [
     azurerm_network_interface.appinterface,
     azurerm_resource_group.appgrp,
+    tls_private_key.linuxkey
   ]
 }
+
